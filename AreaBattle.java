@@ -1,9 +1,10 @@
 package battleship;
 
 class AreaBattle {
-    char[][] area;
+    char[][] area, areaShot;
     // default init area
     {area = new char[10][10];
+    areaShot = new char[10][10];
         for (int i=0; i<10; i++){
             for (int j=0; j<10; j++){
                 area[i][j] = '~';
@@ -85,14 +86,14 @@ class AreaBattle {
 
     public void takeAShot(int i, int j){
         if(area[i][j] == 'O'){
-            area[i][j] = 'X';
-            print();
-            System.out.println("\nYou hit a ship!");
+            areaShot[i][j] = 'X';
+            printShot();
+            System.out.println("\nYou hit a ship!\n");
         }
         else{
-            area[i][j] = 'M';
-            print();
-            System.out.println("\nYou missed!");
+            areaShot[i][j] = 'M';
+            printShot();
+            System.out.println("\nYou missed!\n");
         }
     }
 
@@ -105,6 +106,51 @@ class AreaBattle {
             System.out.print("\n" + (char)(65+i));
             for (int j=0; j<10; j++){
                 System.out.print(" " + area[i][j]);
+            }
+        }
+        System.out.println();
+    }
+    public void printEmpty(){
+        System.out.print(" ");
+        for (int i=1; i<=10; i++) {
+            System.out.print(" " + i);
+        }
+        for (int i=0; i<10; i++){
+            System.out.print("\n" + (char)(65+i));
+            for (int j=0; j<10; j++){
+                System.out.print(" ~");
+            }
+        }
+        System.out.println();
+    }
+    public void printShot(){
+        System.out.print(" ");
+        for (int i=1; i<=10; i++) {
+            System.out.print(" " + i);
+        }
+        for (int i=0; i<10; i++){
+            System.out.print("\n" + (char)(65+i));
+            for (int j=0; j<10; j++){
+                if(areaShot[i][j] == 'M' || areaShot[i][j] == 'X')
+                    System.out.print(" " + areaShot[i][j]);
+                else
+                    System.out.print(" ~");
+            }
+        }
+        System.out.println();
+    }
+    public void printEndGame(){
+        System.out.print(" ");
+        for (int i=1; i<=10; i++) {
+            System.out.print(" " + i);
+        }
+        for (int i=0; i<10; i++){
+            System.out.print("\n" + (char)(65+i));
+            for (int j=0; j<10; j++){
+                if(areaShot[i][j] == 'M' || areaShot[i][j] == 'X')
+                    System.out.print(" " + areaShot[i][j]);
+                else
+                    System.out.print(" " + area[i][j]);
             }
         }
         System.out.println();

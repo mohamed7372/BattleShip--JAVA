@@ -49,9 +49,10 @@ public class Main {
     }
     public static void gameStart(AreaBattle battle){
         System.out.println("\nThe game starts!\n");
-        battle.print();
+        battle.printEmpty();
         System.out.println("\nTake a shot!\n");
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         while(true){
             String inputShot = sc.nextLine();
             Coordinant c = null;
@@ -63,6 +64,7 @@ public class Main {
             }
             // if input correct
             battle.takeAShot(c.iVal, c.jVal);
+            battle.printEndGame();
             break;
         }
     }
