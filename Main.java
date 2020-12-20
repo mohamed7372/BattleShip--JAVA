@@ -17,6 +17,7 @@ public class Main {
                     System.out.println("\nEnter the coordinates of the " + battle.diffShipDescp[i] + "\n");
             }
         }
+
         // start game
         gameStart(battle);
     }
@@ -52,8 +53,8 @@ public class Main {
         battle.printEmpty();
         System.out.println("\nTake a shot!\n");
         Scanner sc = new Scanner(System.in);
-        System.out.println();
-        while(true){
+        boolean gameOver = false;
+        while(!gameOver){
             String inputShot = sc.nextLine();
             Coordinant c = null;
             try {
@@ -63,9 +64,7 @@ public class Main {
                 continue;
             }
             // if input correct
-            battle.takeAShot(c.iVal, c.jVal);
-            battle.printEndGame();
-            break;
+            gameOver = battle.takeAShot(c.iVal, c.jVal);
         }
     }
 }

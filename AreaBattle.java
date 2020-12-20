@@ -84,17 +84,26 @@ class AreaBattle {
         }
     }
 
-    public void takeAShot(int i, int j){
+    public boolean takeAShot(int i, int j){
         if(area[i][j] == 'O'){
             areaShot[i][j] = 'X';
             printShot();
-            System.out.println("\nYou hit a ship!\n");
+            if(nbrShotDownShip(area, 'O') == nbrShotDownShip(areaShot, 'X')){
+                System.out.print("\nYou sank the last ship. You won. Congratulations!");
+                return true;
+            }
+            System.out.println("\nYou hit a ship! Try again:\n");
         }
         else{
             areaShot[i][j] = 'M';
             printShot();
-            System.out.println("\nYou missed!\n");
+            if(nbrShotDownShip(area, 'O') == nbrShotDownShip(areaShot, 'X')){
+                System.out.print("\nYou sank the last ship. You won. Congratulations!");
+                return true;
+            }
+            System.out.println("\nYou missed. Try again:\n");
         }
+        return false;
     }
 
     public void print(){
@@ -139,20 +148,15 @@ class AreaBattle {
         }
         System.out.println();
     }
-    public void printEndGame(){
-        System.out.print(" ");
-        for (int i=1; i<=10; i++) {
-            System.out.print(" " + i);
-        }
+
+    private int nbrShotDownShip(char[][] arr, char ch){
+        int nb = 0;
         for (int i=0; i<10; i++){
-            System.out.print("\n" + (char)(65+i));
-            for (int j=0; j<10; j++){
-                if(areaShot[i][j] == 'M' || areaShot[i][j] == 'X')
-                    System.out.print(" " + areaShot[i][j]);
-                else
-                    System.out.print(" " + area[i][j]);
+            for(int j=0; j<10; j++){
+                if(arr[i][j] == ch)
+                    nb++;
             }
         }
-        System.out.println();
+        return nb;
     }
 }
